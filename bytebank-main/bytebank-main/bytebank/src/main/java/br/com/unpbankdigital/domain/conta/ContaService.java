@@ -34,9 +34,7 @@ public class ContaService {
         var conta = buscarContaPorNumero(numeroDaConta);
         if (valor.compareTo(BigDecimal.ZERO) <= 0) {
             throw new RegraDeNegocioException("Valor do saque deve ser superior a zero!");
-        }/* Se valor for menor que zero, a saída será um valor negativo, geralmente -1.
-Se valor for igual a zero, a saída será zero.
-Se valor for maior que zero, a saída será um valor positivo, geralmente 1.*/
+        }
 
         if (valor.compareTo(conta.getSaldo()) > 0) {
             throw new RegraDeNegocioException("Saldo insuficiente!");

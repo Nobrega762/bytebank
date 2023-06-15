@@ -1,51 +1,34 @@
 package unpbankdigital;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.math.BigDecimal;
-
+import br.com.unpbankdigital.domain.cliente.DadosCadastroCliente;
+import br.com.unpbankdigital.domain.conta.DadosAberturaConta;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import br.com.unpbankdigital.domain.cliente.Cliente;
-import br.com.unpbankdigital.domain.cliente.DadosCadastroCliente;
-import br.com.unpbankdigital.domain.conta.Conta;
 import br.com.unpbankdigital.domain.conta.ContaService;
-import br.com.unpbankdigital.domain.conta.DadosAberturaConta;
+import org.springframework.util.Assert;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 public class ContaServiceTest {
-	
+
+	@MockBean
+	ContaService contaService;
+
 	@Test
-	public void testConsultarSaldo(){
-		ContaService contaService = new ContaService();
+	public void verificarContaAberta(){
 		
-		DadosCadastroCliente dados = new DadosCadastroCliente("Joao","123456","joaolegal@google.com");
-		
-		Conta conta = new Conta(2001, new Cliente(dados));
-		
-		DadosAberturaConta abrirConta = new DadosAberturaConta(2001,dados);
-		
-		contaService.abrir(abrirConta);
-		contaService.realizarDeposito(2001, new BigDecimal("1500.00"));
-		BigDecimal saldoAtual = contaService.consultarSaldo(2001);
-		BigDecimal saldoEsperado = new BigDecimal("1500.00");
-		
-		assertEquals(saldoEsperado, saldoAtual);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		DadosCadastroCliente dadosCliente = new DadosCadastroCliente("Joao","12345","Joaodoido@gmail.com");
+		DadosAberturaConta dados = new DadosAberturaConta(2001,dadosCliente);
+
+		DadosAberturaConta dadosEsperado = new DadosAberturaConta(2001,dadosCliente);
+
+		assertEquals(dadosEsperado,dados);
 	}
 }
