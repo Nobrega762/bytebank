@@ -1,21 +1,28 @@
-package br.com.unpbankdigital.domain.conta;
+package br.com.unpbankdigital.service;
 
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Optional;
 
-import br.com.unpbankdigital.domain.RegraDeNegocioException;
-import br.com.unpbankdigital.domain.cliente.Cliente;
 
+import br.com.unpbankdigital.domain.repository.ContaRepository;
+import br.com.unpbankdigital.domain.entity.Conta;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+@AllArgsConstructor
 public class ContaService {
+   //@Autowired
+  //private final Conta conta;
 
-    private Set<Conta> contas = new HashSet<>();
+   private ContaRepository repository;
 
-    public Set<Conta> listarContasAbertas() {
-        return contas;
+    public Optional<Conta> contas(Long id) {
+        return repository.findById(id);
+
     }
 
-    public BigDecimal consultarSaldo(Integer numeroDaConta) {
+  /*  public BigDecimal consultarSaldo(Integer numeroDaConta) {
         var conta = buscarContaPorNumero(numeroDaConta);
         return conta.getSaldo();
     }
@@ -67,5 +74,5 @@ public class ContaService {
                 .filter(c -> c.getNumero() == numero)
                 .findFirst()
                 .orElseThrow(() -> new RegraDeNegocioException("Não existe conta cadastrada com esse número!"));
-    }
+    }*/
 }

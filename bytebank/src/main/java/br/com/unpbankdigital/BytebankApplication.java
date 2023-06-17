@@ -2,13 +2,19 @@ package br.com.unpbankdigital;
 
 import java.util.Scanner;
 
-import br.com.unpbankdigital.domain.RegraDeNegocioException;
-import br.com.unpbankdigital.domain.cliente.DadosCadastroCliente;
-import br.com.unpbankdigital.domain.conta.ContaService;
-import br.com.unpbankdigital.domain.conta.DadosAberturaConta;
+import br.com.unpbankdigital.exceptions.RegraDeNegocioException;
+import br.com.unpbankdigital.service.ContaService;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class BytebankApplication {
 
+
+    public static void main(String[] args) {
+        SpringApplication.run(BytebankApplication.class, args);
+    }
+/*
     private static ContaService service = new ContaService();
     private static Scanner teclado = new Scanner(System.in).useDelimiter("\n");
 
@@ -136,5 +142,5 @@ public class BytebankApplication {
         System.out.println("Depósito realizado com sucesso!");
         System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu principal");
         teclado.next();
-    }
+    }*/
 }
