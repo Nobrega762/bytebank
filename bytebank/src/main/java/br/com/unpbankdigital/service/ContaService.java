@@ -1,10 +1,13 @@
 package br.com.unpbankdigital.service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 
+import br.com.unpbankdigital.domain.entity.Cliente;
 import br.com.unpbankdigital.domain.repository.ContaRepository;
 import br.com.unpbankdigital.domain.entity.Conta;
+import br.com.unpbankdigital.exceptions.RegraDeNegocioException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,14 +15,25 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class ContaService {
-   //@Autowired
-  //private final Conta conta;
 
    private ContaRepository repository;
 
     public Optional<Conta> contas(Long id) {
         return repository.findById(id);
 
+    }
+
+    public Cliente retornaCliente(Integer conta){
+        if(repository.existsByNumero(conta)){
+            return repository.findByTitular(conta);
+        }
+        else {
+            throw new RegraDeNegocioException("Não existe essa conta");
+        }
+    }
+
+    public Double retornaOSaldo(Integer conta){
+        return repository.findBySaldo(conta);
     }
 
   /*  public BigDecimal consultarSaldo(Integer numeroDaConta) {
