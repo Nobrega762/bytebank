@@ -18,7 +18,7 @@ public class Conta {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private Integer numero;
-    private Float saldo;
+    private Double saldo;
     @ManyToOne
     @JoinColumn(name = "titular_id")
     private Cliente titular;

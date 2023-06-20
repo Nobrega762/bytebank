@@ -9,7 +9,6 @@ import br.com.unpbankdigital.domain.repository.ContaRepository;
 import br.com.unpbankdigital.domain.entity.Conta;
 import br.com.unpbankdigital.exceptions.RegraDeNegocioException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
