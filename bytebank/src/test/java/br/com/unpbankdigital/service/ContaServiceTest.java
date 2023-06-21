@@ -7,6 +7,7 @@ import br.com.unpbankdigital.exceptions.RegraDeNegocioException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -109,6 +110,32 @@ public class ContaServiceTest {
 
 		assertNull(result);
 	}
+
+	@Test
+	public void testCriarConta() {
+		Integer numeroConta = 12345;
+		
+		Mockito.when(repository.existsByNumero(numeroConta)).thenReturn(null);
+
+		service.criarConta(numeroConta);
+
+		Mockito.verify(repository).save(Mockito.any(Conta.class));
+	}
+
+
+	@Test
+	public void testDeletarConta() {
+		Long idConta = 1L;
+
+		Mockito.when(repository.findById(idConta)).thenReturn(Optional.ofNullable(conta));
+
+		service.deletarConta(idConta);
+
+		Mockito.verify(repository).delete(Mockito.any(Conta.class));
+	}
+
+
+
 }
 
 
