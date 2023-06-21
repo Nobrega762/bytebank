@@ -114,7 +114,7 @@ public class ContaServiceTest {
 	@Test
 	public void testCriarConta() {
 		Integer numeroConta = 12345;
-		
+
 		Mockito.when(repository.existsByNumero(numeroConta)).thenReturn(null);
 
 		service.criarConta(numeroConta);

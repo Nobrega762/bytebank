@@ -9,6 +9,7 @@ import br.com.unpbankdigital.domain.repository.ContaRepository;
 import br.com.unpbankdigital.domain.entity.Conta;
 import br.com.unpbankdigital.exceptions.RegraDeNegocioException;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +18,6 @@ public class ContaService {
 
    private ContaRepository repository;
 
-   private Conta conta;
 
     public Optional<Conta> contas(Long id) {
         return repository.findById(id);
@@ -38,6 +38,7 @@ public class ContaService {
     }
 
     public void criarConta(Integer numero){
+        Conta conta = new Conta();
         if(repository.existsByNumero(numero) == null){
             repository.save(conta);
         }
@@ -47,6 +48,7 @@ public class ContaService {
     }
 
     public void deletarConta(Long id){
+        Conta conta = new Conta();
         if(repository.findById(id) == null){
             throw new RegraDeNegocioException("Não pode deletar pois a conta não existe");
 
