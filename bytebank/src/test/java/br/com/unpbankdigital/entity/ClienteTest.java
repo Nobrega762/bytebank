@@ -31,7 +31,23 @@ class ClienteTest {
         assertTrue(violations.isEmpty());
     }
     @Test
-    void testValidationsComErro() {
+    void testValidationsComErroDeEmail() {
+        clienteMock = new Cliente();
+
+        clienteMock.setNome("John Doe");
+        clienteMock.setCpf("045.031.864-85");
+        clienteMock.setEmail("johndoeexample.com");
+
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+
+        Set<ConstraintViolation<Cliente>> violations = validator.validate(clienteMock);
+
+        assertFalse(violations.equals(factory));
+    }
+
+    @Test
+    void testValidationsComErroDeCpf() {
         clienteMock = new Cliente();
 
         clienteMock.setNome("John Doe");
