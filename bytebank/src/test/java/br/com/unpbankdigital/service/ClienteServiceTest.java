@@ -38,7 +38,7 @@ class ClienteServiceTest {
     }
 
     @Test
-    void testDeletarCliente_Existente() {
+    void testDeletarClienteExistente() {
         Cliente cliente = new Cliente();
         cliente.setId(1L);
 
@@ -50,7 +50,7 @@ class ClienteServiceTest {
     }
 
     @Test
-    void testDeletarCliente_Inexistente() {
+    void testDeletarClienteInexistente() {
         Mockito.when(clienteRepository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(RegraDeNegocioException.class, () -> clienteService.deletarCliente(new Cliente(), 1L));
